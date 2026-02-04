@@ -18,7 +18,6 @@ class CancelBookingController extends Controller
             'data' => [
                 'booking_id' => $booking->id,
                 'status' => $booking->status,
-                'available_slots' => $booking->gymClass->available_slots,
             ],
         ]);
     }

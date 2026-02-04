@@ -8,6 +8,8 @@ class GetGymClassByIdService
 {
     public function execute(GymClass $gymClass): GymClass
     {
-        return $gymClass;
+        return GymClass::with('myConfirmedBooking')
+            ->where('id', $gymClass->id)
+            ->firstOrFail();
     }
 }

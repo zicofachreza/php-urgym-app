@@ -15,10 +15,7 @@ class CreateBookingController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Class booked successfully.',
-            'data' => [
-                'booking' => $booking,
-                'available_slots' => $gymClass->available_slots,
-            ],
+            'data' => $booking,
         ]);
     }
 }

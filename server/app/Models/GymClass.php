@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class GymClass extends Model
 {
@@ -31,6 +32,8 @@ class GymClass extends Model
         'duration' => 'integer',
     ];
 
+    protected $appends = ['available_slots'];
+
     public function bookings()
     {
         return $this->hasMany(Booking::class);
@@ -50,5 +53,12 @@ class GymClass extends Model
     public function getAvailableSlotsAttribute()
     {
         return $this->capacity - $this->confirmedBookings()->count();
+    }
+
+    public function myConfirmedBooking()
+    {
+        return $this->hasOne(Booking::class)
+            ->where('user_id', Auth::id())
+            ->where('status', 'confirmed');
     }
 }
