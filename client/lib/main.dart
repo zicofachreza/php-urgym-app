@@ -43,11 +43,15 @@ import 'features/booking/data/repositories/booking_repository_impl.dart';
 import 'features/booking/domain/usecases/get_my_booking_usecase.dart';
 import 'features/booking/presentation/bloc/booking_history/booking_history_bloc.dart';
 
-// ===== PROFILE FEATURE =====
+// ===== PROFILE DATA FEATURE =====
+import 'features/profile/domain/usecases/get_my_profile_usecase.dart';
+import 'features/profile/presentation/bloc/profile_data/profile_data_bloc.dart';
+
+// ===== PROFILE (LOGOUT) FEATURE =====
 import 'features/profile/data/datasources/profile_remote_datasource.dart';
 import 'features/profile/data/repositories/profile_repository_impl.dart';
 import 'features/profile/domain/usecases/logout_usecase.dart';
-import 'features/profile/presentation/bloc/profile_bloc.dart';
+import 'features/profile/presentation/bloc/profile/profile_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -134,7 +138,20 @@ class MyApp extends StatelessWidget {
           },
         ),
 
-        // 👤 PROFILE
+        // 👤 PROFILE DATA
+        BlocProvider<ProfileDataBloc>(
+          create: (_) {
+            final dio = DioClient.create();
+
+            return ProfileDataBloc(
+              GetMyProfileUsecase(
+                ProfileRepositoryImpl(ProfileRemoteDatasource(dio)),
+              ),
+            );
+          },
+        ),
+
+        // 👤 PROFILE (LOGOUT)
         BlocProvider<ProfileBloc>(
           create: (_) {
             final dio = DioClient.create();

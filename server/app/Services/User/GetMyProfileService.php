@@ -2,16 +2,13 @@
 
 namespace App\Services\User;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 class GetMyProfileService
 {
-    public function execute()
+    public function execute(): User
     {
-        $user = auth('api')->user();
-
-        if (! $user) {
-            abort(401, 'Unauthenticated');
-        }
-
-        return $user;
+        return Auth::user();
     }
 }

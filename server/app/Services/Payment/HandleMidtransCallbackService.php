@@ -64,7 +64,7 @@ class HandleMidtransCallbackService
             $payment->user->update([
                 'is_member' => true,
                 'membership_expires_at' => $payment->expiry_date,
-                'membership_barcode_token' => Str::uuid(),
+                'membership_barcode_token' => 'GYM'.strtoupper(str_replace('-', '', Str::uuid())),
             ]);
         });
     }

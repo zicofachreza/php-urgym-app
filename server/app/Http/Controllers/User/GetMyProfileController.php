@@ -13,7 +13,7 @@ class GetMyProfileController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'User profile retrieved successfully',
+            'message' => 'User profile retrieved successfully.',
             'data' => $user,
         ]);
     }

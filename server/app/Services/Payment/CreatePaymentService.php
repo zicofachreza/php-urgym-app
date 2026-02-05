@@ -55,6 +55,14 @@ class CreatePaymentService
                 'first_name' => $user->username,
                 'email' => $user->email,
             ],
+            'item_details' => [
+                [
+                    'id' => $plan->id,
+                    'price' => $plan->discount_price ?? $plan->price,
+                    'quantity' => 1,
+                    'name' => $plan->name,
+                ],
+            ],
         ];
 
         $snap = Snap::createTransaction($params);

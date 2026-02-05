@@ -4,8 +4,12 @@ namespace App\Services\User;
 
 use App\Exceptions\User\MembershipNotActiveException;
 use App\Models\User;
-use Milon\Barcode\Facades\DNS2DFacade as DNS2D;
+use Milon\Barcode\Facades\DNS1DFacade as DNS1D;
 
+/**
+ * Generate barcode image (used for card printing / admin export).
+ * Mobile client generates barcode locally.
+ */
 class GenerateMembershipBarcodeService
 {
     public function execute(User $user): string
@@ -14,13 +18,13 @@ class GenerateMembershipBarcodeService
             throw new MembershipNotActiveException;
         }
 
-        $barcodeContent = 'GYM|'.$user->membership_barcode_token;
+        $barcodeContent = 'GYM'.$user->membership_barcode_token;
 
-        return DNS2D::getBarcodePNG(
+        return DNS1D::getBarcodePNG(
             $barcodeContent,
-            'QRCODE',
-            10,
-            10
+            'C128',
+            2,
+            80
         );
     }
 }

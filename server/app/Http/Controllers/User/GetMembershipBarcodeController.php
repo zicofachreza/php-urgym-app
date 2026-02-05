@@ -16,7 +16,8 @@ class GetMembershipBarcodeController extends Controller
             'status' => 'success',
             'message' => 'Membership barcode retrieved successfully.',
             'data' => [
-                'barcode_base64' => $barcode,
+                'barcode' => $barcode,
+                'username' => Auth::user()->username,
                 'expires_at' => Auth::user()->membership_expires_at,
             ],
         ]);
