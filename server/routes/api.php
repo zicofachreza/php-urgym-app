@@ -9,12 +9,16 @@ use App\Http\Controllers\Booking\CreateBookingController;
 use App\Http\Controllers\Booking\GetMyBookingByIdController;
 use App\Http\Controllers\Booking\GetMyBookingsController;
 use App\Http\Controllers\Cashier\ScanMembershipBarcodeController;
+use App\Http\Controllers\Gym\GetMyGymController;
 use App\Http\Controllers\GymClass\GetAllGymClassController;
 use App\Http\Controllers\GymClass\GetGymClassByIdController;
 use App\Http\Controllers\MembershipPlan\GetAllMembershipPlanController;
+use App\Http\Controllers\Payment\CancelPaymentController;
 use App\Http\Controllers\Payment\CreatePaymentController;
+use App\Http\Controllers\Payment\GetMyPaymentByIdController;
+use App\Http\Controllers\Payment\GetMyPaymentsController;
 use App\Http\Controllers\Payment\MidtransCallbackController;
-use App\Http\Controllers\User\GetMembershipBarcodeController;
+// use App\Http\Controllers\User\GetMembershipBarcodeController;
 use App\Http\Controllers\User\GetMyProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,22 +29,19 @@ Route::post('/payments/midtrans/callback', MidtransCallbackController::class);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/users/me', GetMyProfileController::class);
+    Route::get('/gyms/me', GetMyGymController::class);
     Route::get('/gym-classes', GetAllGymClassController::class);
     Route::get('/gym-classes/{gymClass}', GetGymClassByIdController::class);
     Route::get('/bookings/me', GetMyBookingsController::class);
     Route::get('/bookings/{booking}', GetMyBookingByIdController::class);
     Route::post('/gym-classes/{gymClass}/book', CreateBookingController::class);
-    Route::post('/bookings/{booking}/cancel', CancelBookingController::class)
-        ->middleware('can:cancel,booking');
+    Route::post('/bookings/{booking}/cancel', CancelBookingController::class)->middleware('can:cancel,booking');
     Route::get('/membership-plans', GetAllMembershipPlanController::class);
-    Route::post(
-        '/membership-plans/{membershipPlan}/pay',
-        CreatePaymentController::class
-    );
+    Route::post('/membership-plans/{membershipPlan}/pay', CreatePaymentController::class);
+    Route::post('/payments/{payment}/cancel', CancelPaymentController::class)->middleware('can:cancel,payment');
+    Route::get('/payments/me', GetMyPaymentsController::class);
+    Route::get('/payments/{payment}', GetMyPaymentByIdController::class);
     // Route::get('/users/membership/barcode', GetMembershipBarcodeController::class);
-    Route::post(
-        '/cashier/scan-barcode',
-        ScanMembershipBarcodeController::class
-    );
+    Route::post('/cashier/scan-barcode', ScanMembershipBarcodeController::class);
     Route::post('/logout', LogoutController::class);
 });

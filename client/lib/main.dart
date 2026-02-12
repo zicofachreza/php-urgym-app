@@ -1,3 +1,5 @@
+import 'package:client/features/payment/domain/usecases/get_my_payment_usecase.dart';
+import 'package:client/features/payment/presentation/bloc/payment_history/payment_history_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/network/dio_client.dart';
@@ -35,7 +37,7 @@ import 'features/membership_plan/presentation/bloc/membership_plan_bloc.dart';
 import 'features/payment/data/datasources/payment_remote_datasource.dart';
 import 'features/payment/data/repositories/payment_repository_impl.dart';
 import 'features/payment/domain/usecases/create_payment_usecase.dart';
-import 'features/payment/presentation/bloc/payment_bloc.dart';
+import 'features/payment/presentation/bloc/payment/payment_bloc.dart';
 
 // ===== BOOKING HISTORY FEATURE =====
 import 'features/booking/data/datasources/booking_remote_datasource.dart';
@@ -120,6 +122,19 @@ class MyApp extends StatelessWidget {
 
             return PaymentBloc(
               CreatePaymentUseCase(
+                PaymentRepositoryImpl(PaymentRemoteDatasource(dio)),
+              ),
+            );
+          },
+        ),
+
+        // 📜 PAYMENT HISTORY
+        BlocProvider<PaymentHistoryBloc>(
+          create: (_) {
+            final dio = DioClient.create();
+
+            return PaymentHistoryBloc(
+              GetMyPaymentUsecase(
                 PaymentRepositoryImpl(PaymentRemoteDatasource(dio)),
               ),
             );

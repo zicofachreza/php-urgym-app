@@ -36,6 +36,7 @@ class AdminUserSeeder extends Seeder
 
             return [
                 'id' => Str::uuid(),
+                'gym_id' => $el['gym_id'],
                 'username' => $el['username'],
                 'email' => $el['email'],
                 'role' => $el['role'],

@@ -7,6 +7,7 @@ use App\Exceptions\Payment\PendingPaymentException;
 use App\Models\MembershipPlan;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Midtrans\Config;
 use Midtrans\Snap;
 
@@ -39,16 +40,17 @@ class CreatePaymentService
         Config::$isSanitized = true;
         Config::$is3ds = true;
 
+        $orderId = now()->format('ymdHis').strtoupper(Str::random(4));
+
         $payment = Payment::create([
             'user_id' => $user->id,
             'membership_plan_id' => $plan->id,
             'amount' => $plan->discount_price ?? $plan->price,
-            'status' => 'pending',
         ]);
 
         $params = [
             'transaction_details' => [
-                'order_id' => 'ORDER-'.$payment->id,
+                'order_id' => $orderId,
                 'gross_amount' => $payment->amount,
             ],
             'customer_details' => [

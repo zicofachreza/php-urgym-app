@@ -41,7 +41,7 @@ class HandleMidtransCallbackService
         match ($payload['transaction_status'] ?? null) {
             'settlement' => $this->handlePaid($payment),
             'expire' => $payment->update(['status' => 'expired']),
-            'cancel', 'deny' => $payment->update(['status' => 'failed']),
+            'cancel', 'deny' => $payment->update(['status' => 'cancelled']),
             default => null,
         };
     }

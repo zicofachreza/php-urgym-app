@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "gym_id": "7ed7755b-3e47-4e52-8d4e-879798d20207",
+        "title": "New Class Available",
+        "sub_title": "Try HIIT Extreme Today",
+        "content": "Push your limits and torch calories like never before! Our new HIIT Extreme sessions are designed to maximize your endurance and power. Check the schedule and book your spot now!"
+    },
+    {
+        "id": 2,
+        "gym_id": "7ed7755b-3e47-4e52-8d4e-879798d20207",
+        "title": "Promo Membership",
+        "sub_title": "Up to 30% OFF",
+        "content": "Start your fitness journey without breaking the bank. Join today and enjoy up to 30% off on all annual memberships. Your future self will thank you—don't miss out!"
+    },
+    {
+        "id": 3,
+        "gym_id": "7ed7755b-3e47-4e52-8d4e-879798d20207",
+        "title": "Personal Trainer",
+        "sub_title": "Book Your Session Now",
+        "content": "Stop guessing and start seeing results. Get a personalized workout plan and 1-on-1 coaching from our certified trainers to reach your goals faster and safer. Book your assessment today!"
+    }
+]

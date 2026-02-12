@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
                 AdminUserSeeder::class,
                 GymClassSeeder::class,
                 MembershipPlanSeeder::class,
+                GymSeeder::class,
+                NewsSeeder::class,
             ]);
         }
     }

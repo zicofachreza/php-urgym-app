@@ -1,3 +1,4 @@
+import 'package:client/features/payment/presentation/pages/payment_history_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -186,7 +187,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         icon: Icons.receipt_long,
                         title: 'Transaction History',
                         onTap: () {
-                          // TODO
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const PaymentHistoryPage(),
+                            ),
+                          );
                         },
                       ),
 
@@ -217,8 +223,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 172, 14, 3),
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        backgroundColor: Color.fromARGB(255, 172, 14, 3),
+                        disabledBackgroundColor: Color.fromARGB(
+                          255,
+                          172,
+                          14,
+                          3,
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -277,17 +289,24 @@ class _ProfileMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade900,
-        borderRadius: BorderRadius.circular(14),
+    return Theme(
+      data: Theme.of(context).copyWith(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        hoverColor: Colors.transparent,
       ),
-      child: ListTile(
-        leading: Icon(icon, color: const Color.fromARGB(255, 172, 14, 3)),
-        title: Text(title, style: const TextStyle(color: Colors.white)),
-        trailing: const Icon(Icons.chevron_right, color: Colors.white54),
-        onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade900,
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: ListTile(
+          leading: Icon(icon, color: const Color.fromARGB(255, 172, 14, 3)),
+          title: Text(title, style: const TextStyle(color: Colors.white)),
+          trailing: const Icon(Icons.chevron_right, color: Colors.white54),
+          onTap: onTap,
+        ),
       ),
     );
   }

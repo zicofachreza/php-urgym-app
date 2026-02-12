@@ -9,6 +9,10 @@ class GetMyProfileService
 {
     public function execute(): User
     {
-        return Auth::user();
+        $userId = Auth::id();
+
+        return User::with('gym')
+            ->where('id', $userId)
+            ->first();
     }
 }

@@ -1,6 +1,7 @@
 [
     {
       "id": 1,
+      "gym_id": "7ed7755b-3e47-4e52-8d4e-879798d20207",
       "username": "adminalice",
       "email": "alice.johnson@mail.com",
       "password": "admin",

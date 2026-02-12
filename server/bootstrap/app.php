@@ -52,9 +52,11 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $exceptions->render(function (AccessDeniedHttpException $e, Request $request) {
             if ($request->is('api/*')) {
+                $message = $e->getMessage() ?: 'Unauthorized action.';
+
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'You are not allowed to cancel this booking.',
+                    'message' => $message,
                 ], 403);
             }
         });

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -20,6 +21,7 @@ class User extends Authenticatable implements JWTSubject
      * Mass assignable attributes
      */
     protected $fillable = [
+        'gym_id',
         'username',
         'email',
         'password',
@@ -48,6 +50,11 @@ class User extends Authenticatable implements JWTSubject
         'reset_token_expires' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function gym(): BelongsTo
+    {
+        return $this->belongsTo(Gym::class);
+    }
 
     public function bookings()
     {
